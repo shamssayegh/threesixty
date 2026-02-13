@@ -1,4 +1,19 @@
-﻿const carousel = document.querySelector('.carousel');
+﻿// Header scroll reveal - show header after scrolling past video section
+(() => {
+  const header = document.querySelector('.site-header');
+  const heroVideo = document.querySelector('.hero-video');
+  if (!header || !heroVideo) return;
+
+  const onScroll = () => {
+    const threshold = heroVideo.offsetTop + heroVideo.offsetHeight;
+    header.classList.toggle('header-visible', window.scrollY >= threshold);
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+const carousel = document.querySelector('.carousel');
 
 if (carousel) {
   const items = Array.from(carousel.querySelectorAll('.testimonial'));

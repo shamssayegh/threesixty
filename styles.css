@@ -194,19 +194,41 @@ main {
    ========================================================================== */
 
 .site-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  padding: clamp(2px, 0.1vw, 4px) 0;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 100;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.95);
+  padding: clamp(1px, 0.1vw, 1px) 0;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.5s ease,
+              border-color 0.5s ease,
+              box-shadow 0.5s ease;
+}
+
+.site-header.header-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.15) inset;
 }
 
 .header-wrap {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between;;
 }
 
 .logo-link {
@@ -229,6 +251,7 @@ main {
 .site-logo {
   width: auto;
   height: clamp(140px, 60vw, 140px);
+  margin: -18px 0;
   filter: drop-shadow(0 2px 8px rgba(30, 240, 197, 0.3));
   /* animation: logoGlow 3s ease-in-out infinite; */
 }
